@@ -50,7 +50,7 @@ public class ResourceAuthManagerImpl implements ResourceAuthManager, PopulateMan
 //      READ ACCESS
         ResourceAuthorization resourceAuthorization5 = new ResourceAuthorization(5, ResourceName.PRICING, roleList.get(0), accessLevelList.get(0));
 //      SUPER ADMIN ALL ACCESS
-        ResourceAuthorization resourceAuthorization6 = new ResourceAuthorization(6, ResourceName.REFUND, roleList.get(3), accessLevelList.get(2));
+        ResourceAuthorization resourceAuthorization6 = new ResourceAuthorization(6, ResourceName.ALLOW_ALL, roleList.get(0), accessLevelList.get(2));
         resourceAuthorizationList.addAll(Arrays.asList(resourceAuthorization1, resourceAuthorization2, resourceAuthorization3, resourceAuthorization4, resourceAuthorization5, resourceAuthorization6));
     }
 

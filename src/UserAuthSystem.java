@@ -35,7 +35,7 @@ public class UserAuthSystem {
         Scanner scan = new Scanner(System.in);
         int userId, resourceAuthId;
         int option;
-        System.out.println("ENTER NO. OF TIMES YOU WANT TO SCAN ACTION");
+        System.out.println("ENTER NO. OF TIMES YOU WANT TO PERFORM ACTION");
         int t = scan.nextInt();
 
         while (t>0) {
@@ -71,8 +71,11 @@ public class UserAuthSystem {
                     ResourceName resourceName = ResourceName.fromValue(resource);
                     boolean canAccess = userAccessLevelManager.canAccess(userId, actionType, resourceName);
                     System.out.println("Can user " + userId + " " + actionType + "? " + canAccess + "\n");
+
                     break;
             }
+            System.out.println("CurrentUserAccessLevelList: " + UserAccessLevelManagerImpl.getUserAccessLevelList() + "\n");
+
             t--;
         }
     }

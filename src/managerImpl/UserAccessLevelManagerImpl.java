@@ -100,7 +100,7 @@ public class UserAccessLevelManagerImpl implements UserAccessLevelManager{
              Set<Integer> resourceAuthIdSet = userAccessLevel.getResourceAuthIdSet();
              if (!resourceAuthIdSet.isEmpty()) {
                  for (ResourceAuthorization resourceAuth : resourceAuthorizationList) {
-                     if (resourceAuthIdSet.contains(resourceAuth.getId()) && resourceAuth.getResourceName().equals(resourceName)) {
+                     if (resourceAuthIdSet.contains(resourceAuth.getId()) && (resourceAuth.getResourceName().equals(resourceName) || resourceAuth.getResourceName().equals(ResourceName.ALLOW_ALL))) {
                          if (resourceAuth.getAccessLevel().getActionType().value() >= actionType.value()) {
                              return true;
                          }
@@ -113,6 +113,11 @@ public class UserAccessLevelManagerImpl implements UserAccessLevelManager{
          }
 
         return false;
+    }
+
+    public static List<UserAccessLevel> getUserAccessLevelList()
+    {
+        return userAccessLevelList;
     }
 
     public static UserAccessLevel getUserAccessLevel(int userId)

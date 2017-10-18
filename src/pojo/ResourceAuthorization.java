@@ -12,16 +12,16 @@ import java.util.Objects;
 public class ResourceAuthorization {
     private int id;
     private ResourceName resourceName;
-    private Role roleSet;
+    private Role role;
     private AccessLevel accessLevel;
 
     public ResourceAuthorization() {
     }
 
-    public ResourceAuthorization(int id, ResourceName resourceName, Role roleSet, AccessLevel accessLevel) {
+    public ResourceAuthorization(int id, ResourceName resourceName, Role role, AccessLevel accessLevel) {
         this.id = id;
         this.resourceName = resourceName;
-        this.roleSet = roleSet;
+        this.role = role;
         this.accessLevel = accessLevel;
     }
 
@@ -42,11 +42,11 @@ public class ResourceAuthorization {
     }
 
     public Role getRoleSet() {
-        return roleSet;
+        return role;
     }
 
-    public void setRoleSet(Role roleSet) {
-        this.roleSet = roleSet;
+    public void setRoleSet(Role role) {
+        this.role = role;
     }
 
     public AccessLevel getAccessLevel() {
@@ -64,13 +64,13 @@ public class ResourceAuthorization {
         ResourceAuthorization that = (ResourceAuthorization) o;
         return id == that.id &&
                 resourceName == that.resourceName &&
-                Objects.equals(roleSet, that.roleSet) &&
+                Objects.equals(role, that.role) &&
                 Objects.equals(accessLevel, that.accessLevel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, resourceName, roleSet, accessLevel);
+        return Objects.hash(id, resourceName, role, accessLevel);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class ResourceAuthorization {
         return "ResourceAuthorization{" +
                 "id=" + id +
                 ", resourceName=" + resourceName +
-                ", roleSet=" + roleSet +
+                ", role=" + role +
                 ", accessLevel=" + accessLevel +
                 '}';
     }

@@ -9,7 +9,8 @@ public enum ResourceName {
     BOOKING("BOOKING"),
     PAYMENT("PAYMENT"),
     PRICING("PRICING"),
-    REFUND("REFUND");
+    REFUND("REFUND"),
+    ALLOW_ALL("ALLOW_ALL");
 
     private String value;
 
