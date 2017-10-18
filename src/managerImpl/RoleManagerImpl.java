@@ -1,7 +1,6 @@
 package managerImpl;
 
 import enums.RoleName;
-import managers.PopulateManager;
 import managers.RoleManager;
 import pojo.Role;
 
@@ -14,8 +13,8 @@ import java.util.List;
  *         Part of UserAuthSystem
  *         on 18/10/17.
  */
-public class RoleManagerImpl implements RoleManager, PopulateManager {
-    private static List<Role> roleList;
+public class RoleManagerImpl implements RoleManager {
+    private List<Role> roleList;
 
     private static final RoleManagerImpl INSTANCE = new RoleManagerImpl();
     public static RoleManagerImpl getInstance() {
@@ -23,17 +22,7 @@ public class RoleManagerImpl implements RoleManager, PopulateManager {
     }
 
     private RoleManagerImpl() {
-    }
-
-    @Override
-    public void populate() {
-        Role managerRole = new Role(1, "test", RoleName.MANAGER);
-        Role seniorManagerRole = new Role(2, "test", RoleName.SENIOR_MANAGER);
-        Role adminRole = new Role(3, "test", RoleName.ADMIN);
-        Role superAdminRole = new Role(4, "test", RoleName.SUPER_ADMIN);
-
-        roleList = new ArrayList<>();
-        roleList.addAll(Arrays.asList(managerRole, seniorManagerRole, adminRole, superAdminRole));
+        populate();
     }
 
     @Override
@@ -48,7 +37,6 @@ public class RoleManagerImpl implements RoleManager, PopulateManager {
             roleList.add(role);
         } catch (UnsupportedOperationException | ClassCastException | NullPointerException | IllegalArgumentException e) {
             e.printStackTrace();
-            throw new Exception("Unable to add Role to list. Error: {}"+ e.getMessage());
         }
         return roleList.get(roleList.size()-1).getId();
     }
@@ -68,6 +56,22 @@ public class RoleManagerImpl implements RoleManager, PopulateManager {
         }
         if (existingRole != null) {
             existingRole.setName(updatedRole.getName());
+        }
+    }
+
+    private void populate() {
+        Role managerRole = new Role(1, "test", RoleName.MANAGER);
+        Role seniorManagerRole = new Role(2, "test", RoleName.SENIOR_MANAGER);
+        Role adminRole = new Role(3, "test", RoleName.ADMIN);
+        Role superAdminRole = new Role(4, "test", RoleName.SUPER_ADMIN);
+
+        roleList = new ArrayList<>();
+
+        try {
+            roleList.addAll(Arrays.asList(managerRole, seniorManagerRole, adminRole, superAdminRole));
+        } catch (UnsupportedOperationException | ClassCastException | NullPointerException | IllegalArgumentException e) {
+            e.printStackTrace();
+            System.out.println("Unable to add role to the list. Error: " + e.getLocalizedMessage());
         }
     }
 }

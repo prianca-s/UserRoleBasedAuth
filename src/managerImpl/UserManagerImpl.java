@@ -1,6 +1,5 @@
 package managerImpl;
 
-import managers.PopulateManager;
 import managers.UserManager;
 import pojo.User;
 
@@ -13,8 +12,8 @@ import java.util.List;
  *         Part of UserAuthSystem
  *         on 18/10/17.
  */
-public class UserManagerImpl implements UserManager, PopulateManager {
-    private static List<User> userList;
+public class UserManagerImpl implements UserManager {
+    private List<User> userList;
 
     private static final UserManagerImpl INSTANCE = new UserManagerImpl();
     public static UserManagerImpl getInstance() {
@@ -22,23 +21,12 @@ public class UserManagerImpl implements UserManager, PopulateManager {
     }
 
     private UserManagerImpl() {
-    }
-
-    public static List<User> getUserList() {
-        return userList;
-    }
-
-    public static void setUserList(List<User> userList) {
-        UserManagerImpl.userList = userList;
+        populate();
     }
 
     @Override
-    public void populate() {
-        User user1 = new User(1, "test", "Joseph", "joseph@gmail.com");
-        User user2 = new User(2, "test", "Robert", "robert@gmail.com");
-
-        userList = new ArrayList<>();
-        userList.addAll(Arrays.asList(user1, user2));
+    public List<User> getUserList() {
+        return userList;
     }
 
     @Override
@@ -47,7 +35,6 @@ public class UserManagerImpl implements UserManager, PopulateManager {
             userList.add(user);
         } catch (UnsupportedOperationException | ClassCastException | NullPointerException | IllegalArgumentException e) {
             e.printStackTrace();
-            throw new Exception("Unable to add user to list. Error: {}"+ e.getMessage());
         }
 
         return userList.get(userList.size()-1).getId();
@@ -69,6 +56,20 @@ public class UserManagerImpl implements UserManager, PopulateManager {
         if (existingUser != null) {
             existingUser.setEmail(updatedUser.getEmail());
             existingUser.setName(updatedUser.getName());
+        }
+    }
+
+    private void populate() {
+        User user1 = new User(1, "test", "Joseph", "joseph@gmail.com");
+        User user2 = new User(2, "test", "Robert", "robert@gmail.com");
+
+        userList = new ArrayList<>();
+
+        try {
+            userList.addAll(Arrays.asList(user1, user2));
+        } catch (UnsupportedOperationException | ClassCastException | NullPointerException | IllegalArgumentException e) {
+            e.printStackTrace();
+            System.out.println("Unable to add user to the list. Error: " + e.getLocalizedMessage());
         }
     }
 }

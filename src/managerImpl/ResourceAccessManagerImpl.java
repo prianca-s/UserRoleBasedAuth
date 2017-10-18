@@ -2,10 +2,10 @@ package managerImpl;
 
 import enums.ResourceName;
 import managers.AccessLevelManager;
-import managers.ResourceAuthManager;
+import managers.ResourceAccessManager;
 import managers.RoleManager;
 import pojo.AccessLevel;
-import pojo.ResourceAuthorization;
+import pojo.ResourceAccess;
 import pojo.Role;
 
 import java.util.ArrayList;
@@ -17,26 +17,26 @@ import java.util.List;
  *         Part of UserAuthSystem
  *         on 18/10/17.
  */
-public class ResourceAuthManagerImpl implements ResourceAuthManager{
-    private List<ResourceAuthorization> resourceAuthorizationList = new ArrayList<>();
+public class ResourceAccessManagerImpl implements ResourceAccessManager {
+    private List<ResourceAccess> resourceAccessList = new ArrayList<>();
 
     private RoleManager roleManager;
     private AccessLevelManager accessLevelManager;
 
-    private static final ResourceAuthManagerImpl INSTANCE = new ResourceAuthManagerImpl();
-    public static ResourceAuthManagerImpl getInstance() {
+    private static final ResourceAccessManagerImpl INSTANCE = new ResourceAccessManagerImpl();
+    public static ResourceAccessManagerImpl getInstance() {
         return INSTANCE;
     }
 
-    private ResourceAuthManagerImpl() {
+    private ResourceAccessManagerImpl() {
         roleManager = RoleManagerImpl.getInstance();
         accessLevelManager = AccessLevelManagerImpl.getInstance();
         populate();
     }
 
     @Override
-    public List<ResourceAuthorization> getResourceAuthorizationList() {
-        return resourceAuthorizationList;
+    public List<ResourceAccess> getResourceAccessList() {
+        return resourceAccessList;
     }
 
     private void populate() {
@@ -44,21 +44,26 @@ public class ResourceAuthManagerImpl implements ResourceAuthManager{
         List<AccessLevel> accessLevelList = accessLevelManager.getAccessLevelList();
 
 //      READ ACCESS
-        ResourceAuthorization resourceAuthorization1 = new ResourceAuthorization(1, ResourceName.BOOKING, roleList.get(0), accessLevelList.get(0));
+        ResourceAccess resourceAccess1 = new ResourceAccess(1, ResourceName.BOOKING, roleList.get(0), accessLevelList.get(0));
 //      WRITE ACCESS
-        ResourceAuthorization resourceAuthorization2 = new ResourceAuthorization(2, ResourceName.BOOKING, roleList.get(0), accessLevelList.get(1));
+        ResourceAccess resourceAccess2 = new ResourceAccess(2, ResourceName.BOOKING, roleList.get(0), accessLevelList.get(1));
 //      READ AND WRITE ACCESS
-        ResourceAuthorization resourceAuthorization3 = new ResourceAuthorization(3, ResourceName.BOOKING, roleList.get(1), accessLevelList.get(1));
+        ResourceAccess resourceAccess3 = new ResourceAccess(3, ResourceName.BOOKING, roleList.get(1), accessLevelList.get(1));
 //      READ, WRITE, DELETE ACCESS
-        ResourceAuthorization resourceAuthorization4 = new ResourceAuthorization(4, ResourceName.PAYMENT, roleList.get(2), accessLevelList.get(2));
+        ResourceAccess resourceAccess4 = new ResourceAccess(4, ResourceName.PAYMENT, roleList.get(2), accessLevelList.get(2));
 //      READ ACCESS
-        ResourceAuthorization resourceAuthorization5 = new ResourceAuthorization(5, ResourceName.PRICING, roleList.get(0), accessLevelList.get(0));
+        ResourceAccess resourceAccess5 = new ResourceAccess(5, ResourceName.PRICING, roleList.get(0), accessLevelList.get(0));
 //      SUPER ADMIN ALL ACCESS
-        ResourceAuthorization resourceAuthorization6 = new ResourceAuthorization(6, ResourceName.ALLOW_ALL, roleList.get(0), accessLevelList.get(2));
-        resourceAuthorizationList.addAll(Arrays.asList(resourceAuthorization1, resourceAuthorization2, resourceAuthorization3, resourceAuthorization4, resourceAuthorization5, resourceAuthorization6));
-    }
+        ResourceAccess resourceAccess6 = new ResourceAccess(6, ResourceName.ALLOW_ALL, roleList.get(0), accessLevelList.get(2));
 
+        try {
+            resourceAccessList.addAll(Arrays.asList(resourceAccess1, resourceAccess2, resourceAccess3, resourceAccess4, resourceAccess5, resourceAccess6));
+        } catch (UnsupportedOperationException | ClassCastException | NullPointerException | IllegalArgumentException e) {
+        e.printStackTrace();
+        System.out.println("Unable to add resourceAccess to the list. Error: " + e.getLocalizedMessage());
+    }
+    }
     /** TODO:
-     * FURTHER METHODS CAN BE IMPLEMENTED TO ADD/UPDATE/REMOVE RESOURCE AUTHORIZATION FROM RESOURCE_AUTH_LIST
+     * FURTHER METHODS CAN BE IMPLEMENTED TO ADD/UPDATE/REMOVE RESOURCE ACCESS FROM RESOURCE_AUTH_LIST
     * */
 }
