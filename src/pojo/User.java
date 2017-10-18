@@ -7,7 +7,7 @@ import java.util.Objects;
  *         Part of UserAuthSystem
  *         on 18/10/17.
  */
-public class User extends BaseDTO implements Cloneable{
+public class User extends BaseDTO {
     private String name;
     private String email;
 
@@ -57,9 +57,5 @@ public class User extends BaseDTO implements Cloneable{
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 "} " + super.toString();
-    }
-
-    public Object clone()throws CloneNotSupportedException{
-        return super.clone();
     }
 }
