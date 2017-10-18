@@ -35,17 +35,17 @@ public class UserAccessLevelManagerTest {
     @Test
     public void assignRoleAccessToUser() throws Exception {
         int userId = userManager.getUserList().get(0).getId();
-        int resourceAuthId = resourceAccessManager.getResourceAccessList().get(0).getId();
+        int resourceAccessId = resourceAccessManager.getResourceAccessList().get(0).getId();
 
-        userAccessLevelManager.assignAccess(userId, resourceAuthId);
+        userAccessLevelManager.assignAccess(userId, resourceAccessId);
 
-        boolean resourceIdPresent = userAccessLevelManager.getUserAccessLevelList().get(userId).contains(resourceAuthId);
+        boolean resourceIdPresent = userAccessLevelManager.getUserAccessLevelList().get(userId).contains(resourceAccessId);
 
         Assert.assertEquals(resourceIdPresent, true);
 
         int oldResourceIdsCount = userAccessLevelManager.getUserAccessLevelList().get(userId).size();
 
-        userAccessLevelManager.assignAccess(userId, resourceAuthId);
+        userAccessLevelManager.assignAccess(userId, resourceAccessId);
 
         int newResourceIdsCount = userAccessLevelManager.getUserAccessLevelList().get(userId).size();
 
@@ -55,17 +55,17 @@ public class UserAccessLevelManagerTest {
     @Test
     public void revokeRoleAccessFromUser() throws Exception {
         int userId = userManager.getUserList().get(0).getId();
-        int resourceAuthId = resourceAccessManager.getResourceAccessList().get(0).getId();
+        int resourceAccessId = resourceAccessManager.getResourceAccessList().get(0).getId();
 
-        userAccessLevelManager.assignAccess(userId, resourceAuthId);
+        userAccessLevelManager.assignAccess(userId, resourceAccessId);
 
-        boolean resourceIdPresent = userAccessLevelManager.getUserAccessLevelList().get(userId).contains(resourceAuthId);
+        boolean resourceIdPresent = userAccessLevelManager.getUserAccessLevelList().get(userId).contains(resourceAccessId);
 
         Assert.assertEquals(resourceIdPresent, true);
 
-        userAccessLevelManager.revokeAccess(userId, resourceAuthId);
+        userAccessLevelManager.revokeAccess(userId, resourceAccessId);
 
-        resourceIdPresent = userAccessLevelManager.getUserAccessLevelList().get(userId).contains(resourceAuthId);
+        resourceIdPresent = userAccessLevelManager.getUserAccessLevelList().get(userId).contains(resourceAccessId);
 
         Assert.assertEquals(resourceIdPresent, false);
     }
