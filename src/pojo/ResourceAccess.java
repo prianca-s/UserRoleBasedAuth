@@ -9,16 +9,16 @@ import java.util.Objects;
  *         Part of UserAuthSystem
  *         on 18/10/17.
  */
-public class ResourceAuthorization {
+public class ResourceAccess {
     private int id;
     private ResourceName resourceName;
     private Role role;
     private AccessLevel accessLevel;
 
-    public ResourceAuthorization() {
+    public ResourceAccess() {
     }
 
-    public ResourceAuthorization(int id, ResourceName resourceName, Role role, AccessLevel accessLevel) {
+    public ResourceAccess(int id, ResourceName resourceName, Role role, AccessLevel accessLevel) {
         this.id = id;
         this.resourceName = resourceName;
         this.role = role;
@@ -60,8 +60,8 @@ public class ResourceAuthorization {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ResourceAuthorization)) return false;
-        ResourceAuthorization that = (ResourceAuthorization) o;
+        if (!(o instanceof ResourceAccess)) return false;
+        ResourceAccess that = (ResourceAccess) o;
         return id == that.id &&
                 resourceName == that.resourceName &&
                 Objects.equals(role, that.role) &&

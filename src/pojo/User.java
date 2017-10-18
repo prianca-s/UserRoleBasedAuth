@@ -7,7 +7,7 @@ import java.util.Objects;
  *         Part of UserAuthSystem
  *         on 18/10/17.
  */
-public class User extends BaseDTO {
+public class User extends BaseEntity {
     private String name;
     private String email;
 

@@ -9,7 +9,7 @@ import java.util.Objects;
  *         Part of UserAuthSystem
  *         on 18/10/17.
  */
-public class Role extends BaseDTO {
+public class Role extends BaseEntity {
     private RoleName name;
 
     public Role() {

@@ -9,7 +9,7 @@ import java.util.Objects;
  *         Part of UserAuthSystem
  *         on 18/10/17.
  */
-public class AccessLevel extends BaseDTO {
+public class AccessLevel extends BaseEntity {
     private ActionType actionType;
 
     public AccessLevel() {

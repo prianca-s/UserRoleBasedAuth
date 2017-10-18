@@ -7,14 +7,14 @@ import java.util.Objects;
  *         Part of UserAuthSystem
  *         on 18/10/17.
  */
-public class BaseDTO {
+public class BaseEntity {
     private int id;
     private String createdBy;
 
-    public BaseDTO() {
+    public BaseEntity() {
     }
 
-    public BaseDTO(int id, String createdBy) {
+    public BaseEntity(int id, String createdBy) {
         this.id = id;
         this.createdBy = createdBy;
     }
@@ -38,10 +38,10 @@ public class BaseDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof BaseDTO)) return false;
-        BaseDTO baseDTO = (BaseDTO) o;
-        return id == baseDTO.id &&
-                Objects.equals(createdBy, baseDTO.createdBy);
+        if (!(o instanceof BaseEntity)) return false;
+        BaseEntity baseEntity = (BaseEntity) o;
+        return id == baseEntity.id &&
+                Objects.equals(createdBy, baseEntity.createdBy);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class BaseDTO {
 
     @Override
     public String toString() {
-        return "BaseDTO{" +
+        return "BaseEntity{" +
                 "id=" + id +
                 ", createdBy='" + createdBy + '\'' +
                 '}';
