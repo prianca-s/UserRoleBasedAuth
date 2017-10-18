@@ -2,7 +2,6 @@ package managerImpl;
 
 import enums.ResourceName;
 import managers.AccessLevelManager;
-import managers.PopulateManager;
 import managers.ResourceAuthManager;
 import managers.RoleManager;
 import pojo.AccessLevel;
@@ -18,11 +17,11 @@ import java.util.List;
  *         Part of UserAuthSystem
  *         on 18/10/17.
  */
-public class ResourceAuthManagerImpl implements ResourceAuthManager, PopulateManager{
-    private static List<ResourceAuthorization> resourceAuthorizationList = new ArrayList<>();
+public class ResourceAuthManagerImpl implements ResourceAuthManager{
+    private List<ResourceAuthorization> resourceAuthorizationList = new ArrayList<>();
 
-    RoleManager roleManager;
-    AccessLevelManager accessLevelManager;
+    private RoleManager roleManager;
+    private AccessLevelManager accessLevelManager;
 
     private static final ResourceAuthManagerImpl INSTANCE = new ResourceAuthManagerImpl();
     public static ResourceAuthManagerImpl getInstance() {
@@ -32,10 +31,15 @@ public class ResourceAuthManagerImpl implements ResourceAuthManager, PopulateMan
     private ResourceAuthManagerImpl() {
         roleManager = RoleManagerImpl.getInstance();
         accessLevelManager = AccessLevelManagerImpl.getInstance();
+        populate();
     }
 
     @Override
-    public void populate() {
+    public List<ResourceAuthorization> getResourceAuthorizationList() {
+        return resourceAuthorizationList;
+    }
+
+    private void populate() {
         List<Role> roleList = roleManager.getRoleList();
         List<AccessLevel> accessLevelList = accessLevelManager.getAccessLevelList();
 
@@ -54,11 +58,7 @@ public class ResourceAuthManagerImpl implements ResourceAuthManager, PopulateMan
         resourceAuthorizationList.addAll(Arrays.asList(resourceAuthorization1, resourceAuthorization2, resourceAuthorization3, resourceAuthorization4, resourceAuthorization5, resourceAuthorization6));
     }
 
-    public static List<ResourceAuthorization> getResourceAuthorizationList() {
-        return resourceAuthorizationList;
-    }
-
     /** TODO:
-     * FURTHER METHODS CAN BE IMPLEMENTED TO ADD/UPDATE/ROMOVE RESOURCE AUTHORIZATION FROM RESOURCE_AUTH_LIST
+     * FURTHER METHODS CAN BE IMPLEMENTED TO ADD/UPDATE/REMOVE RESOURCE AUTHORIZATION FROM RESOURCE_AUTH_LIST
     * */
 }
