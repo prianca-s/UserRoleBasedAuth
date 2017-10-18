@@ -1,6 +1,6 @@
 package managers;
 
-import pojo.ResourceAuthorization;
+import pojo.ResourceAccess;
 
 import java.util.List;
 
@@ -9,6 +9,6 @@ import java.util.List;
  *         Part of UserAuthSystem
  *         on 18/10/17.
  */
-public interface ResourceAuthManager {
-    List<ResourceAuthorization> getResourceAuthorizationList();
+public interface ResourceAccessManager {
+    List<ResourceAccess> getResourceAccessList();
 }

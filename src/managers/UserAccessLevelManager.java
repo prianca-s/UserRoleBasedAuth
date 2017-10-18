@@ -3,6 +3,9 @@ package managers;
 import enums.ActionType;
 import enums.ResourceName;
 
+import java.util.Map;
+import java.util.Set;
+
 /**
  * @author priyanka_s
  *         Part of UserAuthSystem
@@ -10,9 +13,11 @@ import enums.ResourceName;
  */
 public interface UserAccessLevelManager {
 
-    void assignAccess(int userId, int resourceAuthId) throws Exception;
+    void assignAccess(int userId, int resourceAccessId) throws Exception;
 
-    void revokeAccess(int userId, int resourceAuthId) throws Exception;
+    void revokeAccess(int userId, int resourceAccessId) throws Exception;
 
     boolean canAccess(int userId, ActionType actionType, ResourceName resourceName) throws Exception;
+
+    Map<Integer, Set<Integer>> getUserAccessLevelList();
 }
