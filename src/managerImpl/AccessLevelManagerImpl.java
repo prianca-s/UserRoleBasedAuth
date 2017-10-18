@@ -30,7 +30,7 @@ public class AccessLevelManagerImpl implements AccessLevelManager, PopulateManag
     public void populate() {
         AccessLevel readAccessLevel = new AccessLevel(1, "test", ActionType.READ );
         AccessLevel writeAccessLevel = new AccessLevel(2, "test", ActionType.WRITE);
-        AccessLevel deleteAccessLevel = new AccessLevel(2, "test", ActionType.DELETE);
+        AccessLevel deleteAccessLevel = new AccessLevel(3, "test", ActionType.DELETE);
 
         accessLevelList = new ArrayList<>();
         accessLevelList.addAll(Arrays.asList(readAccessLevel, writeAccessLevel, deleteAccessLevel));
