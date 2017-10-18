@@ -3,8 +3,9 @@ package test;
 import enums.ActionType;
 import enums.ResourceName;
 import managerImpl.*;
-import managers.PopulateManager;
+import managers.ResourceAccessManager;
 import managers.UserAccessLevelManager;
+import managers.UserManager;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,18 +18,14 @@ import org.junit.Test;
  */
 public class UserAccessLevelManagerTest {
     private UserAccessLevelManager userAccessLevelManager;
+    private UserManager userManager;
+    private ResourceAccessManager resourceAccessManager;
 
     @Before
     public void setUp() throws Exception {
-        PopulateManager userManager = UserManagerImpl.getInstance();
-        PopulateManager roleManager = RoleManagerImpl.getInstance();
-        PopulateManager accessLevelManager = AccessLevelManagerImpl.getInstance();
-        PopulateManager resourceAuthManager = ResourceAuthManagerImpl.getInstance();
+        userManager = UserManagerImpl.getInstance();
         userAccessLevelManager = UserAccessLevelManagerImpl.getInstance();
-        userManager.populate();
-        roleManager.populate();
-        accessLevelManager.populate();
-        resourceAuthManager.populate();
+        resourceAccessManager = ResourceAccessManagerImpl.getInstance();
     }
 
     /**
@@ -37,45 +34,45 @@ public class UserAccessLevelManagerTest {
      * */
     @Test
     public void assignRoleAccessToUser() throws Exception {
-        int userId = UserManagerImpl.getUserList().get(0).getId();
-        int resourceAuthId = ResourceAuthManagerImpl.getResourceAuthorizationList().get(0).getId();
+        int userId = userManager.getUserList().get(0).getId();
+        int resourceAuthId = resourceAccessManager.getResourceAccessList().get(0).getId();
 
         userAccessLevelManager.assignAccess(userId, resourceAuthId);
 
-        boolean resourceIdPresent = UserAccessLevelManagerImpl.getUserAccessLevel(userId).getResourceAuthIdSet().contains(resourceAuthId);
+        boolean resourceIdPresent = userAccessLevelManager.getUserAccessLevelList().get(userId).contains(resourceAuthId);
 
         Assert.assertEquals(resourceIdPresent, true);
 
-        int oldResourceIdsCount = UserAccessLevelManagerImpl.getUserAccessLevel(userId).getResourceAuthIdSet().size();
+        int oldResourceIdsCount = userAccessLevelManager.getUserAccessLevelList().get(userId).size();
 
         userAccessLevelManager.assignAccess(userId, resourceAuthId);
 
-        int newResourceIdsCount = UserAccessLevelManagerImpl.getUserAccessLevel(userId).getResourceAuthIdSet().size();
+        int newResourceIdsCount = userAccessLevelManager.getUserAccessLevelList().get(userId).size();
 
         Assert.assertEquals(oldResourceIdsCount, newResourceIdsCount);
     }
 
     @Test
     public void revokeRoleAccessFromUser() throws Exception {
-        int userId = UserManagerImpl.getUserList().get(0).getId();
-        int resourceAuthId = ResourceAuthManagerImpl.getResourceAuthorizationList().get(0).getId();
+        int userId = userManager.getUserList().get(0).getId();
+        int resourceAuthId = resourceAccessManager.getResourceAccessList().get(0).getId();
 
         userAccessLevelManager.assignAccess(userId, resourceAuthId);
 
-        boolean resourceIdPresent = UserAccessLevelManagerImpl.getUserAccessLevel(userId).getResourceAuthIdSet().contains(resourceAuthId);
+        boolean resourceIdPresent = userAccessLevelManager.getUserAccessLevelList().get(userId).contains(resourceAuthId);
 
         Assert.assertEquals(resourceIdPresent, true);
 
         userAccessLevelManager.revokeAccess(userId, resourceAuthId);
 
-        resourceIdPresent = UserAccessLevelManagerImpl.getUserAccessLevel(userId).getResourceAuthIdSet().contains(resourceAuthId);
+        resourceIdPresent = userAccessLevelManager.getUserAccessLevelList().get(userId).contains(resourceAuthId);
 
         Assert.assertEquals(resourceIdPresent, false);
     }
 
     @Test
     public void canAccessResource() throws Exception {
-        int userId = UserManagerImpl.getUserList().get(0).getId();
+        int userId = userManager.getUserList().get(0).getId();
         ResourceName resourceName = ResourceName.BOOKING;
 
 //      Provide write access
