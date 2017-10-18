@@ -28,9 +28,9 @@ public class RoleManagerImpl implements RoleManager, PopulateManager {
     @Override
     public void populate() {
         Role managerRole = new Role(1, "test", RoleName.MANAGER);
-        Role seniorManagerRole = new Role(1, "test", RoleName.SENIOR_MANAGER);
-        Role adminRole = new Role(1, "test", RoleName.ADMIN);
-        Role superAdminRole = new Role(1, "test", RoleName.SUPER_ADMIN);
+        Role seniorManagerRole = new Role(2, "test", RoleName.SENIOR_MANAGER);
+        Role adminRole = new Role(3, "test", RoleName.ADMIN);
+        Role superAdminRole = new Role(4, "test", RoleName.SUPER_ADMIN);
 
         roleList = new ArrayList<>();
         roleList.addAll(Arrays.asList(managerRole, seniorManagerRole, adminRole, superAdminRole));
